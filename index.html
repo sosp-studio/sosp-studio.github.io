@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <title>SOSP</title>
+    <style>
+    @font-face {
+      font-family: arthemys;
+      src: url(./fonts/ArthemysDisplay-Light-mo4zrw.woff2);
+    }
+    @font-face {
+      font-family: ibmplexsans;
+      src: url(./fonts/IBMPlexSans/IBMPlexSans-Light.ttf);
+    }
+    body, html, canvas{
+      margin: 0;
+      padding: 0;
+      font-variant-ligatures: discretionary-ligatures; 
+      cursor: pointer;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    html {
+      scrollbar-width: none;
+    }
+    body {
+      width: 100%;
+      font-family: arthemys;
+      padding-bottom: 10em;
+      color: #666;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    body::-webkit-scrollbar {
+      display: none;
+    }
+    canvas{
+      margin:auto;
+      display:block;
+      width: 100%;
+    }
+    main{
+      margin: auto;
+      max-width: 73rem;
+      padding: 4rem;
+    }
+    h1 {
+      font-size:5rem;
+      font-variant-ligatures: discretionary-ligatures; 
+      font-weight: normal;
+      color: rgba(50,50,50,255);
+    }
+    p {
+      font-family: "ibmplexsans", sans-serif;
+      font-size: 2.125rem;
+      line-height: 1.65;
+    }
+    a, a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      text-decoration: none;
+    }
+    a:active {
+      color: inherit;
+    }
+    </style>
+    <script Content-type="application/javascript" src="./js/lib/p5.js"></script>
+    <script Content-type="application/javascript" src="./js/sketch.js"></script>
+  </head>
+  <body>
+    <div id="canvasParent"></div>
+    <main>
+      <h1>STUDIO of<br>SIMULATION & <br>PATAPHYSICS</h1>
+      <p>
+        The Studio of Simulation and Pataphysics 
+        is an interdisciplinary art and design studio 
+        investigating how models, media, and computational systems 
+        shape the ways we perceive, imagine, and make sense of the world. 
+        The studio collaborates with academic research groups, cultural institutions, public organisations, and industry partners 
+        to create research-driven design projects, installations, and experimental prototypes.
+      </p>
+      <p>
+        For enquiries, contact <a href="mailto:info@sosp.studio">info@sosp.studio</a>.
+      </p>
+    </main>
+  </body>
+</html>
