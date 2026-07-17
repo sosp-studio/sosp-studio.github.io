@@ -1,93 +1,292 @@
 <!DOCTYPE html>
 <html lang="en-GB">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOSP</title>
+
     <style>
-    @font-face {
-      font-family: arthemys;
-      src: url(./fonts/ArthemysDisplay-Light-mo4zrw.woff2);
-    }
-    @font-face {
-      font-family: ibmplexsans;
-      src: url(./fonts/IBMPlexSans/IBMPlexSans-Light.ttf);
-    }
-    body, html, canvas{
-      margin: 0;
-      padding: 0;
-      font-variant-ligatures: discretionary-ligatures; 
-    }
-    ::-webkit-scrollbar {
-      display: none;
-    }
-    html {
-      scrollbar-width: none;
-    }
-    body {
-      width: 100%;
-      font-family: arthemys;
-      padding-bottom: 10em;
-      color: #666;
-      overflow-y: scroll;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    body::-webkit-scrollbar {
-      display: none;
-    }
-    canvas{
-      margin:auto;
-      display:block;
-      width: 100%;
-    }
-    #canvasParent{
-      height:200px;
-    }
-    main{
-      margin: auto;
-      max-width: 73rem;
-      padding: 4rem;
-      padding-top:0;
-    }
-    h1 {
-      font-size:5rem;
-      font-variant-ligatures: discretionary-ligatures; 
-      font-weight: normal;
-      color: rgba(50,50,50,255);
-    }
-    p {
-      font-family: "ibmplexsans", sans-serif;
-      font-size: 2.125rem;
-      line-height: 1.65;
-    }
-    a, a:visited {
-      color: inherit;
-      text-decoration: none;
-    }
-    a:hover, a:focus {
-      text-decoration: none;
-    }
-    a:active {
-      color: inherit;
-    }
+      @font-face {
+        font-family: arthemys;
+        src: url("./fonts/ArthemysDisplay-Light-mo4zrw.woff2");
+      }
+
+      @font-face {
+        font-family: ibmplexsans;
+        src: url("./fonts/IBMPlexSans/IBMPlexSans-Light.ttf");
+      }
+
+      :root {
+        --page-width: 73rem;
+        --page-padding: clamp(1.5rem, 4vw, 4rem);
+        --text-colour: #666;
+        --heading-colour: #323232;
+        --gap: clamp(2rem, 4vw, 4rem);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scrollbar-width: none;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        padding-bottom: clamp(5rem, 10vw, 10rem);
+        overflow-y: scroll;
+        color: var(--text-colour);
+        background: #fff;
+        font-family: arthemys;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      body::-webkit-scrollbar,
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      canvas {
+        display: block;
+        width: 100%;
+        margin: auto;
+      }
+
+      #canvasParent {
+        <!-- height: clamp(120px, 18vw, 220px); -->
+        height:200px;
+      }
+
+      main {
+        width: min(100%, var(--page-width));
+        margin: 0 auto;
+        padding: 0 var(--page-padding);
+      }
+
+      h1,
+      h2,
+      p {
+        margin-top: 0;
+        font-variant-ligatures: discretionary-ligatures; 
+      }
+
+      h1 {
+        margin-top: clamp(2rem, 5vw, 4rem);
+        margin-bottom: clamp(2rem, 5vw, 4rem);
+        color: var(--heading-colour);
+        font-size: clamp(3rem, 7.2vw, 5rem);
+        font-weight: normal;
+        <!-- line-height: 1.0; -->
+        font-family: arthemys;
+        letter-spacing: -0.02em;
+        font-variant-ligatures: discretionary-ligatures;
+        text-rendering: optimizeLegibility;
+      }
+
+      h1,
+      h1 * {
+        font-variant-ligatures: discretionary-ligatures;
+        font-feature-settings: "dlig" 1;
+      }
+
+      p {
+        max-width: 38ch;
+        font-family: "ibmplexsans", sans-serif;
+        font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+        line-height: 1.6;
+      }
+
+      a,
+      a:visited,
+      a:active {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:focus-visible {
+        outline: 1px solid currentColor;
+        outline-offset: 0.3rem;
+      }
+
+      .intro {
+        margin-bottom: clamp(6rem, 12vw, 11rem);
+      }
+
+      .intro p:last-child {
+        margin-bottom: 0;
+      }
+
+      .contact a {
+        border-bottom: 1px solid currentColor;
+      }
+
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(3rem, 6vw, 6rem) var(--gap);
+      }
+
+      .project {
+        display: block;
+      }
+
+      .project-image {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        display: block;
+      }
+
+      .project h2 {
+        margin: 1rem 0 0.35rem;
+        color: var(--heading-colour);
+        font-size: clamp(1.35rem, 1.45vw, 1.8rem);
+        font-weight: normal;
+        line-height: 1.05;
+      }
+
+      .project p {
+        max-width: none;
+        margin-bottom: 0;
+        font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+        line-height: 1.45;
+      }
+
+      @media (hover: hover) {
+        .project-image {
+          transition: opacity 160ms ease;
+        }
+
+        .project:hover .project-image {
+          opacity: 0.82;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .projects {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 620px) {
+        h1 {
+          font-size: clamp(2.8rem, 15vw, 4rem);
+          font-size: clamp(2.8rem, 12vw, 4rem);
+        }
+
+        p {
+          font-size: clamp(1.05rem, 5vw, 1.35rem);
+          line-height: 1.55;
+        }
+
+        .projects {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
-    <script Content-type="application/javascript" src="./js/lib/p5.js"></script>
-    <script Content-type="application/javascript" src="./js/sketch.js"></script>
+
+    <script src="./js/lib/p5.js"></script>
+    <script src="./js/sketch.js"></script>
   </head>
+
   <body>
     <div id="canvasParent"></div>
+
     <main>
-      <h1>STUDIO of<br>SIMULATION & <br>PATAPHYSICS</h1>
-      <p>
-        The Studio of Simulation and Pataphysics 
-        is an interdisciplinary art and design studio 
-        investigating how models, media, and computational systems 
-        shape the ways we perceive, imagine, and make sense of the world. 
-        The studio collaborates with academic research groups, cultural institutions, public organisations, and industry partners 
-        to create research-driven design projects, installations, and experimental prototypes.
-      </p>
-      <p>
-        For enquiries, contact <a href="mailto:info@sosp.studio">info@sosp.studio</a>
-      </p>
+      <section class="intro">
+        <h1>STUDIO of<br>SIMULATION &amp;<br>PATAPHYSICS</h1>
+
+        <p>
+          The Studio of Simulation and Pataphysics is an interdisciplinary art
+          and design studio investigating how models, media, and computational
+          systems shape the ways we perceive, imagine, and make sense of the
+          world. The studio collaborates with academic research groups,
+          cultural institutions, public organisations, and industry partners to
+          create research-driven design projects, installations, and
+          experimental prototypes.
+        </p>
+
+        <p class="contact">
+          For enquiries, contact
+          <a href="mailto:info@sosp.studio">info@sosp.studio</a>
+        </p>
+      </section>
+
+      <h1>Featured Projects</h1>
+      <section class="projects" aria-label="Projects">
+
+        <a class="project" href="javascript:void(0)">
+          <img
+            class="project-image"
+            src="./assets/iom.webp"
+            alt="Institute of Making, UCL, Big Toilet Project"
+          >
+          <h2>Institute of Making, University College London</h2>
+          <p>Big Toilet Project for Evidence Week</p>
+        </a>
+
+        <a class="project" href="javascript:void(0)">
+          <img
+            class="project-image"
+            src="./assets/ual.avif"
+            alt="UAL, Carbon Literacy Training"
+          >
+          <h2>University of the Arts London</h2>
+          <p>Carbon Literacy Training Analysis</p>
+        </a>
+
+        <a class="project" href="javascript:void(0)">
+          <img
+            class="project-image"
+            src="./assets/universal-barriers.jpg"
+            alt="RISCS, University of Bristol, Universal Barriers to Cyber Security"
+          >
+          <h2>RISCS, University of Bristol</h2>
+          <p>Universal Barriers to Cyber Security</p>
+        </a>
+
+        <a class="project" href="javascript:void(0)">
+          <img
+            class="project-image"
+            src="./assets/ual-chelsea.jpg"
+            alt="University of the Arts London teaching tools"
+          >
+          <h2>Chelsea College of Arts, University of the Arts London</h2>
+          <p>Teaching and Assessment Tools</p>
+        </a>
+
+        <a class="project" href="javascript:void(0)">
+          <img
+            class="project-image"
+            src="./assets/ucl-vamm.avif"
+            alt="Institute for Global Health, UCL"
+          >
+          <h2>Institute for Global Health, University College London</h2>
+          <p>Violence and Migration Modelling</p>
+        </a>
+
+        <a class="project" href="javascript:void(0)">
+          <img
+            class="project-image"
+            src="./assets/lshtm.jpg"
+            alt="LSHTM, egocentric networks"
+          >
+          <h2>London School of Hygeine and Tropical Medicine</h2>
+          <p>Egocentric Network Mapping Tool</p>
+        </a>
+
+      </section>
     </main>
   </body>
 </html>
